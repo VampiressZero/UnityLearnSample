@@ -3,15 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UnityEngine;
 
 namespace Assets.LearnMaterials_2.Scripts
 {
-    public class AlexanderScript : FatherScript
+    public abstract class FatherScript
     {
-        public override void Use()
-        {
-
-        }
+        public abstract void Use();
     }
 }
