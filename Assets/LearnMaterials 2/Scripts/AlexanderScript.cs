@@ -9,15 +9,23 @@ namespace Assets.LearnMaterials_2.Scripts
 {
     public class AlexanderScript : FatherScript
     {
-        private Transform target;
-        public AlexanderScript(Transform target)
+        private Transform myTransform;
+
+        private void Awake()
         {
-            this.target = target;
+            myTransform = transform;
         }
+
+        [ContextMenu("Collapse")]
         public override void Use()
         {
-            target.Rotate(new Vector3(30,30), 45);
-            // target.DetachChildren();
+            int count = myTransform.childCount;
+
+            myTransform.GetChild(0).localScale = Vector3.zero;
+            //for (int i = 0; i < count; i++)
+            //{
+            //    Destroy(myTransform.GetChild(i).gameObject);
+            //}
         }
     }
 }
