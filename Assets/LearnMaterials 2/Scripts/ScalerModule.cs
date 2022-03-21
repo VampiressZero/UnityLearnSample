@@ -4,7 +4,7 @@ using UnityEngine;
 [HelpURL("https://docs.google.com/document/d/1rdTEVSrCcYOjqTJcFCHj46RvnbdJhmQUb3gHMDhVftI/edit?usp=sharing")]
 public class ScalerModule : MonoBehaviour
 {
-    [SerializeField] private Vector3 targetScale = new Vector3(2,2,2);
+    [SerializeField] private Vector3 targetScale = new Vector3(10, 10, 10);
 
     [SerializeField] private float changeSpeed;
 
@@ -17,9 +17,9 @@ public class ScalerModule : MonoBehaviour
         myTransform = transform;
         defaultScale = myTransform.localScale;
         toDefault = false;
-        ActivateModule();
     }
 
+    [ContextMenu("Μενÿιρÿ")]
     public void ActivateModule()
     {
         Vector3 target = toDefault ? defaultScale : targetScale;

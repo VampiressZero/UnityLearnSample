@@ -17,9 +17,9 @@ public class TransparentModule : MonoBehaviour
         mat = GetComponent<Renderer>().material;
         defaultAlpha = mat.color.a;
         toDefault = false;
-        ActivateModule();
     }
 
+    [ContextMenu("Исчезни")]
     public void ActivateModule()
     {
         float target = toDefault ? defaultAlpha : 0;
