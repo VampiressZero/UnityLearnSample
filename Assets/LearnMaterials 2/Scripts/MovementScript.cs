@@ -20,11 +20,14 @@ namespace Assets.LearnMaterials_2.Scripts
         public override void Use()
         {
             Vector3 direction = position - myTransform.position;
-            if (direction.magnitude > 0.3f)
+            for (var i = 0;  i < 100; i++)
             {
-                myTransform.forward = direction;
+                if (direction.magnitude > 0.3f)
+                {
+                    myTransform.forward = direction;
 
-                myTransform.position = direction.normalized * Time.deltaTime;
+                    myTransform.position = direction.normalized * speed * Time.deltaTime;
+                }
             }
         }
 
@@ -37,13 +40,7 @@ namespace Assets.LearnMaterials_2.Scripts
         // Update is called once per frame
         void Update()
         {
-            Vector3 direction = position - myTransform.position;
-            if (direction.magnitude > 0.3f)
-            {
-                myTransform.forward = direction;
-
-                myTransform.position = direction.normalized * Time.deltaTime;
-            }
+            
         }
     }
 }
