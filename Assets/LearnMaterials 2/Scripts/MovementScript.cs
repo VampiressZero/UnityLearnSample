@@ -32,7 +32,7 @@ namespace Assets.LearnMaterials_2.Scripts
         {
             if (move == true)
             {
-                UseAsync();
+                Use();
             }
         }
 
