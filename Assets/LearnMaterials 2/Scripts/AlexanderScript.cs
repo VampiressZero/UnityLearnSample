@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.LearnMaterials_2.Scripts
 {
     public class AlexanderScript : FatherScript
     {
-        const float speed = 1;
-
         private Transform myTransform;
+        private bool isCollapsed = true;
 
         private void Awake()
         {
@@ -20,35 +13,26 @@ namespace Assets.LearnMaterials_2.Scripts
         }
 
         [ContextMenu("Collapse")]
-        public override async void Use()
+        public override void Use()
         {
-            for (var i = 0; i < myTransform.childCount; i++)
-            {
-                StartCoroutine(ScaleCoroutine(myTransform.GetChild(i), Vector3.zero));
-
-                await Task.Delay(Convert.ToInt32(1000 * speed));
-                
-            }
-            await Task.Delay(Convert.ToInt32(1000 * speed));
-
-            for(var i = 0; i < myTransform.childCount; i++)
-            {
-                Destroy(myTransform.GetChild(i).gameObject);
-            }
-
+            isCollapsed = false;
         }
-        private IEnumerator ScaleCoroutine(Transform transform, Vector3 target)
-        {
 
-            Vector3 start = transform.lossyScale;
-            float t = 0;
-            while (t < 1)
+        public void FixedUpdate()
+        {
+            if (!isCollapsed)
             {
-                t += Time.deltaTime * speed;
-                transform.localScale = Vector3.Lerp(start, target, t);
-                yield return null;
+                for (var i = 0; i < myTransform.childCount; i++)
+                {
+                    var child = myTransform.GetChild(i);
+                    child.localScale = child.lossyScale - new Vector3(0.01f, 0.01f, 0.01f);
+                    if (child.lossyScale.magnitude < 0.1f)
+                    {
+                        isCollapsed = true;
+                        Destroy(child.gameObject);
+                    }
+                }
             }
-            transform.localScale = target;
         }
     }
 }
